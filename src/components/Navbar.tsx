@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowRight, Menu, X, Sun, Moon, Shield } from 'lucide-react';
+import { Sparkles, ArrowRight, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface NavbarProps {
@@ -60,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAuditModal }) => {
 
         <div className="flex items-center justify-between gap-4">
           
-          {/* Brand Logo with prominent visibility & Executive Tag */}
+          {/* Brand Logo */}
           <div className="flex items-center gap-3 shrink-0">
             <a
               href="#"
@@ -87,16 +87,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAuditModal }) => {
                 />
               </div>
             </a>
-
-            {/* Micro Agency Defence Badge */}
-            <div className={`hidden xl:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider border ${
-              isLight 
-                ? 'bg-indigo-50/80 border-indigo-200 text-indigo-700' 
-                : 'bg-white/5 border-white/10 text-slate-300'
-            }`}>
-              <Shield className="w-3 h-3 text-[#6366f1]" />
-              <span>FOUNDER BRAND</span>
-            </div>
           </div>
 
           {/* Desktop Navigation Links Island */}

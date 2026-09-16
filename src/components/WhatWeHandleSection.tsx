@@ -23,9 +23,11 @@ export const WhatWeHandleSection: React.FC<WhatWeHandleSectionProps> = ({ onOpen
   const { isLight } = useTheme();
   const [activeTabId, setActiveTabId] = useState<string>(WHAT_WE_HANDLE[0].id);
   const [expandedMobileAccordion, setExpandedMobileAccordion] = useState<string | null>(WHAT_WE_HANDLE[0].id);
+  const [showAllModulePoints, setShowAllModulePoints] = useState<boolean>(false);
 
   const activeModule = WHAT_WE_HANDLE.find(m => m.id === activeTabId) || WHAT_WE_HANDLE[0];
   const ActiveIcon = TAB_ICONS[activeModule.id] || Crosshair;
+  const visiblePoints = showAllModulePoints ? activeModule.points : activeModule.points.slice(0, 4);
 
   const toggleMobileAccordion = (id: string) => {
     setExpandedMobileAccordion(prev => (prev === id ? null : id));
@@ -142,18 +144,18 @@ export const WhatWeHandleSection: React.FC<WhatWeHandleSectionProps> = ({ onOpen
               </p>
 
               {/* Active Tab Bullet List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                {activeModule.points.map((point, idx) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                {visiblePoints.map((point, idx) => (
                   <div
                     key={idx}
-                    className={`p-3.5 rounded-2xl border flex items-center gap-3 transition-colors ${
+                    className={`p-3 rounded-2xl border flex items-center gap-2.5 transition-colors ${
                       isLight 
                         ? 'bg-slate-50/90 border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/20' 
                         : 'bg-[#0a0d20]/80 border-white/5 hover:border-[#6366f1]/30'
                     }`}
                   >
                     <CheckCircle2 className={`w-4 h-4 shrink-0 ${isLight ? 'text-indigo-600' : 'text-[#fda4af]'}`} />
-                    <span className={`text-sm font-sans font-light ${
+                    <span className={`text-xs sm:text-sm font-sans font-light ${
                       isLight ? 'text-slate-700' : 'text-slate-200'
                     }`}>
                       {point}
@@ -161,6 +163,20 @@ export const WhatWeHandleSection: React.FC<WhatWeHandleSectionProps> = ({ onOpen
                   </div>
                 ))}
               </div>
+
+              {/* Collapsible toggle if more than 4 points */}
+              {activeModule.points.length > 4 && (
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowAllModulePoints(!showAllModulePoints)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-[#6366f1] hover:text-indigo-400 transition-colors cursor-pointer"
+                  >
+                    <span>{showAllModulePoints ? "Collapse to 4 core deliverables" : `+ View all ${activeModule.points.length} deliverables`}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showAllModulePoints ? 'rotate-180' : ''}`} />
+                  </button>
+                </div>
+              )}
 
               {/* Bottom Micro Action Bar */}
               <div className={`pt-4 flex items-center justify-between text-xs font-mono ${

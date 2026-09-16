@@ -41,7 +41,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenAuditModal }) =>
             </h1>
 
             {/* Subhead & Condensed Value Thesis */}
-            <div className="space-y-4 max-w-2xl">
+            <div className="space-y-3 max-w-2xl">
               <p className={`text-lg sm:text-xl font-display font-light leading-snug transition-colors duration-300 ${
                 isLight ? 'text-slate-800' : 'text-slate-200'
               }`}>
@@ -50,8 +50,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenAuditModal }) =>
               <p className={`text-sm sm:text-base font-sans font-light leading-relaxed transition-colors duration-300 ${
                 isLight ? 'text-slate-600' : 'text-slate-400'
               }`}>
-                People don’t just follow companies anymore — they follow the people behind them. 
-                INFABIO turns your founder’s expertise into visibility, executive authority, and commercial pipeline without stealing hours from your calendar.
+                Turn raw domain expertise into category authority and inbound pipeline — in just 30 minutes weekly.
               </p>
             </div>
 

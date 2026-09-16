@@ -1,26 +1,30 @@
-import React from 'react';
-import { Shield } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, ChevronDown } from 'lucide-react';
 import { PositioningMatrix } from './PositioningMatrix';
 import { useTheme } from '../context/ThemeContext';
 
 export const ComparisonSection: React.FC = () => {
   const { isLight } = useTheme();
+  const [showAllComparisons, setShowAllComparisons] = useState<boolean>(false);
 
   const NOT_ITEMS = [
-    "Dancing on TikTok trends or chasing fleeting algorithmic gimmicks",
-    "Posting generic, copy-pasted motivational quotes every morning",
-    "Turning your personal or private life into vulnerable public spectacle",
-    "Manufacturing an artificial persona disconnected from how you operate",
-    "Collecting empty vanity metrics that never convert into commercial revenue"
+    "Dancing on TikTok trends or chasing algorithmic gimmicks",
+    "Copy-pasting generic motivational quotes every morning",
+    "Turning private life into vulnerable social spectacle",
+    "Manufacturing a fake persona disconnected from operations",
+    "Chasing empty vanity likes that never convert to revenue"
   ];
 
   const IS_ITEMS = [
-    "Translating your battle-tested lessons and contrarian category perspective into market authority",
-    "Clarifying your thesis so prospective buyers understand how you solve their problems",
-    "Protecting your calendar: zero writing burden, just 30 minutes of voice extraction weekly",
-    "Distributing high-signal essays, frameworks, and videos across executive decision-makers",
-    "Generating predictable inbound pipeline, Tier-1 talent applications, and investor conviction"
+    "Translating battle-tested lessons into category authority",
+    "Clarifying your thesis so prospective buyers pre-sell themselves",
+    "Zero writing burden: 30 minutes of voice extraction weekly",
+    "Distributing high-signal frameworks to C-suite decision makers",
+    "Compounding inbound pipeline, talent pull, and investor trust"
   ];
+
+  const visibleNotItems = showAllComparisons ? NOT_ITEMS : NOT_ITEMS.slice(0, 3);
+  const visibleIsItems = showAllComparisons ? IS_ITEMS : IS_ITEMS.slice(0, 3);
 
   return (
     <section id="what-this-is" className={`py-24 md:py-32 bg-transparent border-t relative overflow-hidden transition-colors duration-300 ${
@@ -87,12 +91,12 @@ export const ComparisonSection: React.FC = () => {
                 It's not about becoming an influencer, posting quotes, or manufacturing a personality.
               </p>
 
-              <ul className="space-y-4 pt-2 font-sans font-light">
-                {NOT_ITEMS.map((item, idx) => (
-                  <li key={idx} className={`flex items-start gap-3.5 text-sm sm:text-base leading-relaxed ${
+              <ul className="space-y-3.5 pt-2 font-sans font-light">
+                {visibleNotItems.map((item, idx) => (
+                  <li key={idx} className={`flex items-start gap-3 text-sm sm:text-base leading-snug ${
                     isLight ? 'text-slate-700' : 'text-slate-300'
                   }`}>
-                    <span className="text-rose-500 mt-1 shrink-0 font-bold text-sm">✕</span>
+                    <span className="text-rose-500 mt-0.5 shrink-0 font-bold text-sm">✕</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -143,15 +147,15 @@ export const ComparisonSection: React.FC = () => {
               <p className={`text-xl sm:text-2xl font-display font-light leading-snug ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                It's about amplifying the expertise and authentic commercial voice you already have.
+                Amplify the authentic commercial expertise you already command.
               </p>
 
-              <ul className="space-y-4 pt-2 font-sans font-light">
-                {IS_ITEMS.map((item, idx) => (
-                  <li key={idx} className={`flex items-start gap-3.5 text-sm sm:text-base leading-relaxed ${
+              <ul className="space-y-3.5 pt-2 font-sans font-light">
+                {visibleIsItems.map((item, idx) => (
+                  <li key={idx} className={`flex items-start gap-3 text-sm sm:text-base leading-snug ${
                     isLight ? 'text-slate-800' : 'text-slate-200'
                   }`}>
-                    <span className="text-[#6366f1] mt-1 shrink-0 font-black text-sm">✓</span>
+                    <span className="text-[#6366f1] mt-0.5 shrink-0 font-black text-sm">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -167,6 +171,22 @@ export const ComparisonSection: React.FC = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Expandable Comparison Toggle Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            type="button"
+            onClick={() => setShowAllComparisons(!showAllComparisons)}
+            className={`px-5 py-2 rounded-full text-xs font-mono transition-all flex items-center gap-2 border cursor-pointer ${
+              isLight
+                ? 'bg-white border-slate-300 text-slate-700 hover:border-indigo-400 hover:text-indigo-600 shadow-sm'
+                : 'bg-[#0a0d20] border-white/10 text-slate-300 hover:border-[#6366f1]/50 hover:text-white'
+            }`}
+          >
+            <span>{showAllComparisons ? "Collapse to 3 essential contrasts" : "+ Compare all 5 strategic dimensions"}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showAllComparisons ? 'rotate-180' : ''}`} />
+          </button>
         </div>
 
         {/* Visual Category Whitespace Scatter Matrix */}

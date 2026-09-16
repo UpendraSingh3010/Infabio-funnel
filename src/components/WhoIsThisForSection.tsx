@@ -1,5 +1,5 @@
-import React from 'react';
-import { Users, CheckCircle2, UserCheck, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Users, CheckCircle2, UserCheck, ArrowRight, ChevronDown } from 'lucide-react';
 import { TARGET_PERSONAS, ESPECIALLY_VALUABLE_CONDITIONS } from '../data/infabioData';
 import { useTheme } from '../context/ThemeContext';
 
@@ -9,6 +9,11 @@ interface WhoIsThisForSectionProps {
 
 export const WhoIsThisForSection: React.FC<WhoIsThisForSectionProps> = ({ onOpenAuditModal }) => {
   const { isLight } = useTheme();
+  const [showAllCriteria, setShowAllCriteria] = useState<boolean>(false);
+
+  const visibleConditions = showAllCriteria 
+    ? ESPECIALLY_VALUABLE_CONDITIONS.slice(0, 6) 
+    : ESPECIALLY_VALUABLE_CONDITIONS.slice(0, 3);
 
   return (
     <section id="who-is-this-for" className={`py-24 md:py-32 bg-transparent border-t relative transition-colors duration-300 ${
@@ -131,11 +136,11 @@ export const WhoIsThisForSection: React.FC<WhoIsThisForSectionProps> = ({ onOpen
               </h3>
 
               {/* Checklist with check icons */}
-              <div className="space-y-3.5 pt-1">
-                {ESPECIALLY_VALUABLE_CONDITIONS.slice(0, 6).map((item, idx) => (
+              <div className="space-y-3 pt-1">
+                {visibleConditions.map((item, idx) => (
                   <div
                     key={idx}
-                    className={`p-3.5 rounded-2xl border flex items-start gap-3 transition-all ${
+                    className={`p-3 rounded-2xl border flex items-start gap-3 transition-all ${
                       isLight 
                         ? 'bg-slate-50/80 border-slate-200/80 text-slate-700 hover:bg-indigo-50/30 hover:border-indigo-200' 
                         : 'bg-[#0a0d20]/80 border border-white/5 hover:border-emerald-500/30'
@@ -149,6 +154,18 @@ export const WhoIsThisForSection: React.FC<WhoIsThisForSectionProps> = ({ onOpen
                     </span>
                   </div>
                 ))}
+              </div>
+
+              {/* Collapsible Toggle Button */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowAllCriteria(!showAllCriteria)}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-[#6366f1] hover:text-indigo-400 transition-colors cursor-pointer"
+                >
+                  <span>{showAllCriteria ? "Collapse to 3 primary signals" : "+ View all 6 qualification signals"}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showAllCriteria ? 'rotate-180' : ''}`} />
+                </button>
               </div>
             </div>
 

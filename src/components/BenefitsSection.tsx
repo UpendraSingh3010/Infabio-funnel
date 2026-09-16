@@ -1,5 +1,5 @@
-import React from 'react';
-import { ShieldCheck, Lock, Magnet, Building2, Users, TrendingUp, Sparkles, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldCheck, Lock, Magnet, Building2, Users, TrendingUp, Sparkles, ArrowRight, ChevronDown } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface BenefitsSectionProps {
@@ -8,51 +8,54 @@ interface BenefitsSectionProps {
 
 export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ onOpenAuditModal }) => {
   const { isLight } = useTheme();
+  const [showAllBenefits, setShowAllBenefits] = useState<boolean>(false);
 
   const OUTCOMES = [
     {
       title: "Build Authority",
-      line: "Position you as the definitive, must-listen category leader in your sector.",
+      line: "Position you as the definitive category benchmark in your industry.",
       icon: ShieldCheck,
       tag: "Category Leadership",
       color: "#6366f1"
     },
     {
       title: "Create Trust",
-      line: "Let enterprise prospects understand how you think before they ever speak to your sales team.",
+      line: "Ensure buyers understand your thesis before call 1 with your sales team.",
       icon: Lock,
       tag: "Pre-Call Conviction",
       color: "#fda4af"
     },
     {
       title: "Generate Inbound",
-      line: "Turn strategic reach into high-intent inbound pipeline, partnerships, and introductions.",
+      line: "Turn strategic reach into high-intent inbound pipeline and partner intros.",
       icon: Magnet,
       tag: "Pipeline Engine",
       color: "#c084fc"
     },
     {
       title: "Strengthen Company Brand",
-      line: "Give your corporate identity a human, credible, and memorable competitive moat.",
+      line: "Give your company a human, memorable, and enduring competitive moat.",
       icon: Building2,
       tag: "Enterprise Recall",
       color: "#6366f1"
     },
     {
       title: "Attract Talent",
-      line: "Inspire Tier-1 operators and leaders to build alongside an authentic, visible visionary.",
+      line: "Inspire Tier-1 leaders to build alongside an authentic visionary founder.",
       icon: Users,
       tag: "A-Player Magnetism",
       color: "#fda4af"
     },
     {
-      title: "Improve Investor Perception",
-      line: "Turn your public digital footprint into an undeniable proof point of execution.",
+      title: "Improve Investor Conviction",
+      line: "Turn your public digital footprint into clear proof of market execution.",
       icon: TrendingUp,
       tag: "Capital Leverage",
       color: "#c084fc"
     }
   ];
+
+  const visibleOutcomes = showAllBenefits ? OUTCOMES : OUTCOMES.slice(0, 3);
 
   return (
     <section id="what-it-does" className={`py-24 md:py-32 bg-transparent border-t relative transition-colors duration-300 ${
@@ -81,9 +84,9 @@ export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ onOpenAuditMod
           </p>
         </div>
 
-        {/* 6-Card Icon Grid: 3 columns x 2 rows, one icon + one line each, NO paragraphs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {OUTCOMES.map((item, idx) => {
+        {/* Card Grid: 3 columns, one icon + one crisp line each */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {visibleOutcomes.map((item, idx) => {
             const IconComp = item.icon;
             return (
               <div
@@ -145,6 +148,22 @@ export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ onOpenAuditMod
               </div>
             );
           })}
+        </div>
+
+        {/* Expandable Collapsible Toggle */}
+        <div className="flex justify-center mb-12">
+          <button
+            type="button"
+            onClick={() => setShowAllBenefits(!showAllBenefits)}
+            className={`px-5 py-2 rounded-full text-xs font-mono transition-all flex items-center gap-2 border cursor-pointer ${
+              isLight
+                ? 'bg-white border-slate-300 text-slate-700 hover:border-indigo-400 hover:text-indigo-600 shadow-sm'
+                : 'bg-[#0a0d20] border-white/10 text-slate-300 hover:border-[#6366f1]/50 hover:text-white'
+            }`}
+          >
+            <span>{showAllBenefits ? "Collapse to 3 primary outcomes" : "+ View all 6 commercial outcomes"}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showAllBenefits ? 'rotate-180' : ''}`} />
+          </button>
         </div>
 
         {/* Section Bottom CTA with standard single repeated button */}

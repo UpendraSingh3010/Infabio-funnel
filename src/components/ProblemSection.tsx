@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Clock, AlertTriangle, CheckCircle2, TrendingDown, 
-  TrendingUp, ShieldAlert, ShieldCheck, ArrowRight, Zap, Activity 
+  TrendingUp, ShieldAlert, ShieldCheck, ArrowRight, Zap, Activity, ChevronDown 
 } from 'lucide-react';
 
 interface ProblemSectionProps {
@@ -10,6 +10,7 @@ interface ProblemSectionProps {
 
 export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenAuditModal }) => {
   const [activeScenario, setActiveScenario] = useState<'dormant' | 'infabio'>('dormant');
+  const [showAgitationDetails, setShowAgitationDetails] = useState<boolean>(false);
 
   const TIMELINE_DATA = {
     dormant: {
@@ -104,17 +105,42 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenAuditModal
               </span>
             </h2>
 
-            {/* Condensed Copy */}
-            <div className="space-y-4 text-slate-300 font-sans font-light leading-relaxed text-base sm:text-lg">
-              <p>
-                When prospective enterprise buyers, Tier-1 investors, and top operators hear about your company, they don’t just read your homepage — they immediately search your name.
+            {/* Crisp Lead Copy & Collapsible Breakdown */}
+            <div className="space-y-4">
+              <p className="text-slate-300 font-sans font-light leading-relaxed text-base sm:text-lg">
+                Enterprise buyers don't just read your homepage — in <span className="text-white font-medium">8 seconds on LinkedIn</span>, they evaluate your category conviction, domain mastery, and whether you lead your market or merely follow it.
               </p>
-              <p className="text-slate-400 text-sm sm:text-base">
-                In under eight seconds on LinkedIn, they evaluate your recent thinking, test whether you articulate a clear category point of view, and decide whether you lead your market or merely follow it.
-              </p>
-              <p className="text-slate-400 text-sm sm:text-base">
-                If your presence is dormant, erratic, or outsourced to generic AI platitudes, you’re losing commercial trust and deal velocity before your team ever gets on a discovery call.
-              </p>
+
+              {/* Collapsible Deep-Dive Toggle */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowAgitationDetails(!showAgitationDetails)}
+                  className="inline-flex items-center gap-2 text-xs font-mono text-[#fda4af] hover:text-white transition-colors cursor-pointer group py-1"
+                >
+                  <span className="underline underline-offset-4 decoration-rose-500/40 group-hover:decoration-white">
+                    {showAgitationDetails ? "Collapse buyer friction breakdown" : "+ View why dormant profiles lose deals"}
+                  </span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showAgitationDetails ? 'rotate-180 text-white' : ''}`} />
+                </button>
+
+                {showAgitationDetails && (
+                  <div className="mt-3 p-4 rounded-2xl bg-[#0a0d20]/90 border border-rose-500/20 text-xs font-sans text-slate-300 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <p className="flex items-start gap-2">
+                      <span className="text-rose-400 font-bold">•</span>
+                      <span><strong>Silent Deal Killer:</strong> Prospects research you before Call 1. If your feed is dormant, they assume lack of category momentum.</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-rose-400 font-bold">•</span>
+                      <span><strong>AI Platitude Fatigue:</strong> Generic ghostwritten posts dilute executive trust faster than staying silent.</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-rose-400 font-bold">•</span>
+                      <span><strong>Competitor Displacement:</strong> A vocal competitor with clear category POV wins the sale before your RFP is opened.</span>
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Micro Checklist of Buyer Audit Points as Compact Chip Row */}

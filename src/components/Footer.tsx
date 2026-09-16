@@ -53,11 +53,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAuditModal }) => {
             </div>
 
             <div className="space-y-1">
-              <h3 className={`text-3xl sm:text-4xl font-display font-light tracking-tight ${
-                isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                INFABIO
-              </h3>
               <p className="text-xl sm:text-2xl font-display font-light text-transparent bg-clip-text bg-brand-gradient italic">
                 Building brands around the people building businesses.
               </p>
@@ -78,31 +73,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAuditModal }) => {
               <div className={`flex items-center gap-2 text-xs ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
                 <MapPin className="w-3.5 h-3.5 text-[#fda4af]" />
                 <span><strong>Creative & Growth Division:</strong> Jaipur, India</span>
-              </div>
-            </div>
-
-            {/* Partner Network Logos */}
-            <div className="pt-4">
-              <span className={`text-[10px] font-bold uppercase tracking-widest block mb-2 font-mono ${
-                isLight ? 'text-slate-500' : 'text-slate-400'
-              }`}>
-                Ecosystem &amp; Network Partners
-              </span>
-              <div className="flex items-center gap-6">
-                <img
-                  src="/fabulous-logo.webp"
-                  alt="Fabulous Media"
-                  className={`h-7 w-auto object-contain transition-opacity ${
-                    isLight ? 'opacity-80 hover:opacity-100 grayscale hover:grayscale-0' : 'opacity-60 hover:opacity-100'
-                  }`}
-                />
-                <img
-                  src="/gocommercially-logo.webp"
-                  alt="GoCommercially"
-                  className={`h-6 w-auto object-contain transition-opacity ${
-                    isLight ? 'opacity-80 hover:opacity-100 grayscale hover:grayscale-0' : 'opacity-60 hover:opacity-100'
-                  }`}
-                />
               </div>
             </div>
           </div>
@@ -178,16 +148,65 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAuditModal }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className={`pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono gap-4 ${
+        <div className={`pt-8 flex flex-col md:flex-row items-center justify-between text-xs font-mono gap-6 ${
           isLight ? 'text-slate-500' : 'text-slate-500'
         }`}>
-          <div>
-            © {new Date().getFullYear()} INFABIO Marketing Defense Agency. All rights reserved.
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+            <span>© {new Date().getFullYear()} Infabio Marketing Defense Agency. All rights reserved.</span>
+            <div className="flex items-center gap-4">
+              <span className="hover:underline cursor-pointer">Privacy Policy</span>
+              <span className="hover:underline cursor-pointer">Terms of Service</span>
+              <span className="hover:underline cursor-pointer">NDA Protected</span>
+            </div>
           </div>
-          <div className="flex items-center gap-6">
-            <span className="hover:underline cursor-pointer">Privacy Policy</span>
-            <span className="hover:underline cursor-pointer">Terms of Service</span>
-            <span className="hover:underline cursor-pointer">NDA Protected</span>
+
+          {/* Site Credits */}
+          <div className="flex items-center gap-5 shrink-0 justify-center md:justify-end">
+            <a
+              href="https://fabulousmedia.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center transition-all hover:scale-105"
+              title="Fabulous Media"
+            >
+              <img
+                src={isLight ? "/fabulous-logo-dark.webp" : "/fabulous-logo.webp"}
+                alt="Fabulous Media"
+                className={`h-6 w-auto object-contain transition-opacity ${
+                  isLight ? 'opacity-90 hover:opacity-100' : 'opacity-65 hover:opacity-100'
+                }`}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (isLight && !target.src.includes('fabulous-logo.webp')) {
+                    target.src = '/fabulous-logo.webp';
+                    target.style.filter = 'invert(1) hue-rotate(180deg)';
+                  }
+                }}
+              />
+            </a>
+            <span className={`h-3.5 w-[1px] ${isLight ? 'bg-slate-300' : 'bg-white/15'}`} />
+            <a
+              href="https://gocommercially.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center transition-all hover:scale-105"
+              title="GoCommercially"
+            >
+              <img
+                src={isLight ? "/gocommercially-logo-dark.webp" : "/gocommercially-logo.webp"}
+                alt="GoCommercially"
+                className={`h-5 w-auto object-contain transition-opacity ${
+                  isLight ? 'opacity-90 hover:opacity-100' : 'opacity-65 hover:opacity-100'
+                }`}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (isLight && !target.src.includes('gocommercially-logo.webp')) {
+                    target.src = '/gocommercially-logo.webp';
+                    target.style.filter = 'invert(1)';
+                  }
+                }}
+              />
+            </a>
           </div>
         </div>
       </div>
