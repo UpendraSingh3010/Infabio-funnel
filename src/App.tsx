@@ -3,19 +3,15 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { ThreeMeshBackground } from './components/ThreeMeshBackground';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { JudgedSection } from './components/JudgedSection';
-import { AntiInfluencerSection } from './components/AntiInfluencerSection';
+import { ProblemSection } from './components/ProblemSection';
+import { ComparisonSection } from './components/ComparisonSection';
 import { BenefitsSection } from './components/BenefitsSection';
-import { ContentEngineSection } from './components/ContentEngineSection';
+import { FlowSection } from './components/FlowSection';
 import { WhatWeHandleSection } from './components/WhatWeHandleSection';
-import { InfabioSystemSection } from './components/InfabioSystemSection';
-import { AssetMultiplierSection } from './components/AssetMultiplierSection';
-import { AuthenticitySection } from './components/AuthenticitySection';
-import { BottleneckSection } from './components/BottleneckSection';
+import { SystemStepperSection } from './components/SystemStepperSection';
+import { HubSpokeSection } from './components/HubSpokeSection';
 import { WhoIsThisForSection } from './components/WhoIsThisForSection';
-import { CategoryVoiceSection } from './components/CategoryVoiceSection';
-import { ReadySection } from './components/ReadySection';
-import { AuditSection } from './components/AuditSection';
+import { CompoundsAndAuditSection } from './components/CompoundsAndAuditSection';
 import { Footer } from './components/Footer';
 import { StrategySessionModal } from './components/StrategySessionModal';
 
@@ -41,52 +37,40 @@ function AppContent() {
       {/* Sticky Top Navbar with Brand Logo, Compact Links & Theme Switcher */}
       <Navbar onOpenAuditModal={handleOpenModal} />
 
-      {/* Premium Crisp Funnel Flow */}
+      {/* 10-Section Funnel Flow */}
       <main className="relative z-10">
-        {/* 01. Hero: Build a Founder Brand / People Trust Before They Buy */}
+        {/* 01. HERO — headline + subhead + CTA button + founder portrait/silhouette placeholder graphic */}
         <HeroSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 02. Your Personal Brand Is Already Being Judged */}
-        <JudgedSection onOpenAuditModal={handleOpenModal} />
+        {/* 02. THE PROBLEM — two columns (condensed agitation copy + mock LinkedIn UI card) */}
+        <ProblemSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 03. Founder Marketing Is Not About Becoming An Influencer */}
-        <AntiInfluencerSection />
+        {/* 03. WHAT THIS ACTUALLY IS — ✕/✓ two-column comparison component */}
+        <ComparisonSection />
 
-        {/* 04. What Founder Marketing Can Do For You */}
+        {/* 04. WHAT IT DOES FOR YOU — 6-card icon grid (3x2, one icon + one line each) */}
         <BenefitsSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 05. We Turn Your Expertise Into A Content Engine */}
-        <ContentEngineSection onOpenAuditModal={handleOpenModal} />
+        {/* 05. HOW IT WORKS — horizontal 5-node flow with arrows (Think → Capture → Shape → Distribute → Optimise) */}
+        <FlowSection />
 
-        {/* 06. What We Handle */}
+        {/* 06. WHAT WE HANDLE — tabbed interface / mobile accordion (6 tabs, one visible at once) */}
         <WhatWeHandleSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 07. The INFABIO Founder Marketing System (01 to 06) */}
-        <InfabioSystemSection onOpenAuditModal={handleOpenModal} />
+        {/* 07. THE SYSTEM — numbered 6-step stepper (Infabio 6-step timeline) */}
+        <SystemStepperSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 08. One Founder. Multiple Content Assets. */}
-        <AssetMultiplierSection onOpenAuditModal={handleOpenModal} />
+        {/* 08. ONE CONVERSATION, MANY ASSETS — hub-and-spoke diagram */}
+        <HubSpokeSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 09. We Don’t Ghostwrite A Fake Version Of You */}
-        <AuthenticitySection />
-
-        {/* 10. Built For Founders Who Are Busy Building */}
-        <BottleneckSection onOpenAuditModal={handleOpenModal} />
-
-        {/* 11 & 12. Who Is This For? & Diagnostic Checklist */}
+        {/* 09. WHO IT'S FOR — two columns (persona chips + qualifying pain points checklist) */}
         <WhoIsThisForSection onOpenAuditModal={handleOpenModal} />
 
-        {/* 13 & 14. From Invisible Founder To Category Voice & Compounding Business Asset */}
-        <CategoryVoiceSection onOpenAuditModal={handleOpenModal} />
-
-        {/* 15. Ready To Become More Visible Than Your Competition? */}
-        <ReadySection onOpenAuditModal={handleOpenModal} />
-
-        {/* 16. Start With A Founder Brand Audit */}
-        <AuditSection onOpenAuditModal={handleOpenModal} />
+        {/* 10. WHY IT COMPOUNDS + AUDIT CTA — condensed 2-3 sentences + trend graph + audit checklist + lead form */}
+        <CompoundsAndAuditSection onOpenAuditModal={handleOpenModal} />
       </main>
 
-      {/* Footer: INFABIO - Building brands around the people building businesses */}
+      {/* Footer */}
       <Footer onOpenAuditModal={handleOpenModal} />
 
       {/* Strategy Session Booking & Diagnostic Modal */}
@@ -98,10 +82,12 @@ function AppContent() {
   );
 }
 
-export default function App() {
+export function App() {
   return (
     <ThemeProvider>
       <AppContent />
     </ThemeProvider>
   );
 }
+
+export default App;
